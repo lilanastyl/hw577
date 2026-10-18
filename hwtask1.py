@@ -18,12 +18,10 @@ def task_1():
         print(f"{x} | {y} | {z} |   {sh}   |    {az}    |  {oxy}  |    {fv}")
 
     print("\nВектор значень вийшов такий f(x,y,z):", "".join(f_vector))
-
 # Завдання 2 (9 варіант)
 # Суперпозиція функцій h(x, y) = f5(f4(x, y, x), y, x)
 
 def task_2():
-
     print("task2: Суперпозиція функцій")
     print("h(x, y) = f5(f4(x, y, x), y, x)")
 
@@ -37,7 +35,6 @@ def task_2():
     def ef5(u, v, w):
         idx = u * 4 + v * 2 + w
         return f5_v[idx]
-
     print("x | y | f4(x,y,x) | h(x,y) = f5(f4(x,y,x), y, x)")
     print("-" * 48)
 
@@ -48,8 +45,7 @@ def task_2():
         h_vector.append(str(h_val))
         print(f"{x} | {y} | {inner} | {h_val}")
 
-    print("\nВектор значень h(x,y):", "".join(h_vector))
-
+    print("Вектор значень h(x,y):", "".join(h_vector))
 
 # Завдання 3 (9 варіант)
 # Пошук істотних та фіктивних змінних для f(x, y, z) = (0000 1010)
@@ -80,12 +76,10 @@ def task_3():
             if eff(*t0) != eff(*t1):
                 is_essential = True
                 break
-
         if is_essential:
             evv.append(var_name)
         else:
             dv.append(var_name)
-
     print(f"Суттєві (істотні) змінні: {evv}")
     print(f"Фіктивні змінні:          {dv}")
     print("\nФормула через істотні змінні: f(x, z) = x AND (NOT z)")
@@ -95,45 +89,39 @@ def task_3():
 # Аналіз відношення rho: -x^2 + x + 10 <= -y^2 + y + 10
 
 def task_4():
-
-    print("ЗАВДАННЯ 4: Властивості відношення")
-
-
+    print("task 4: Властивості відношення")
     X = [-7, -6.2, -5, -4.3, -0.25, 0, 0.5, 15, 510]
-
     def g(t):
         return -t ** 2 + t + 10
-
     def rho(x, y):
         return g(x) <= g(y)
-
-    is_reflexive = all(rho(x, x) for x in X)
-    is_transitive = all(
+    is_rf = all(rho(x, x) for x in X)
+    is_tr = all(
         rho(x, z)
         for x in X for y in X for z in X
         if rho(x, y) and rho(y, z)
     )
-    is_antisymmetric = all(
+    is_at = all(
         x == y
         for x in X for y in X
         if rho(x, y) and rho(y, x)
     )
-
     print(f"Множина X: {X}")
-    print(f"Рефлексивність:{is_reflexive}")
-    print(f"Транзитивність:{is_transitive}")
-    print(f"Антисиметричність:{is_antisymmetric}")
-
-    ipo = is_reflexive and is_transitive and is_antisymmetric
+    print(f"Рефлексивність:{is_rf}")
+    print(f"Транзитивність:{is_tr}")
+    print(f"Антисиметричність:{is_at}")
+    
+    ipo = is_rf and is_tr and is_at
     print(f"\nЧи є відношенням порядку?{ipo}")
     print(f"Чи є ланцюгом?{ipo}")
     print(f"Чи є ґраткою?{ipo}")
 
     max_elem = max(X, key=lambda t: g(t))
     min_elem = min(X, key=lambda t: g(t))
+
+    
     print(f"\nНайбільший (максимальний) елемент:{max_elem} (g({max_elem}) = {g(max_elem)})")
     print(f"Найменший (мінімальний) елемент:{min_elem} (g({min_elem}) = {g(min_elem)})")
-
 
 if __name__ == "__main__":
     task_1()
